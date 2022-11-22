@@ -167,13 +167,10 @@ public class SignupActivity extends AppCompatActivity {
         user.setPhone(phone);
         user.setRole(2);
         user.setSoLan(0);
-        myRef.child(user.getId()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Toast.makeText(SignupActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                finish();
-            }
+        myRef.child(user.getId()).setValue(user).addOnSuccessListener(unused -> {
+            Toast.makeText(SignupActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+            finish();
         });
     }
 }
