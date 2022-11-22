@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -16,10 +17,18 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     BottomNavigationView bottomNav;
     ViewPager2 viewPager2;
     ViewPager2Adapter adapter;
+    public static String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        userId = getIntent().getExtras().getString("userId");
+
         bottomNav = findViewById(R.id.bottomNav);
         viewPager2 = findViewById(R.id.viewPage2);
         adapter = new ViewPager2Adapter(MainActivity.this);

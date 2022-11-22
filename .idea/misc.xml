@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/background_corner20_bordergray.xml" value="0.173" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/background_login.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/ic_order.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1545" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_order.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_user.xml" value="0.173" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_choose_dish.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_login.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_main.xml" value="0.253125" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_my_orders_detail.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_opening.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_order.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_signup.xml" value="0.1" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_feedback.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_home.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_order.xml" value="0.24947916666666667" />
