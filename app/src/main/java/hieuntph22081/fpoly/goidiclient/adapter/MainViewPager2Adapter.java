@@ -10,8 +10,8 @@ import hieuntph22081.fpoly.goidiclient.fragment.HomeFragment;
 import hieuntph22081.fpoly.goidiclient.fragment.MyOrdersFragment;
 import hieuntph22081.fpoly.goidiclient.fragment.ProfileFragment;
 
-public class ViewPager2Adapter extends FragmentStateAdapter {
-    public ViewPager2Adapter(@NonNull FragmentActivity fragmentActivity) {
+public class MainViewPager2Adapter extends FragmentStateAdapter {
+    public MainViewPager2Adapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
