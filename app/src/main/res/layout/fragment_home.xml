@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCallHotline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#E53935"
+        android:contentDescription="Hotline"
+        android:src="@drawable/ic_baseline_local_phone_24" />
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"
-        android:textSize="26sp"/>
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-</FrameLayout>
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_goidi" />
+
+            <TextView
+                android:id="@+id/title"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo"
+                android:layout_centerHorizontal="true"
+                android:text="@string/restaurant_name"
+                android:layout_marginBottom="10dp"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/slideViewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_below="@+id/title"
+                android:paddingStart="80dp"
+                android:paddingEnd="80dp" />
+            <me.relex.circleindicator.CircleIndicator3
+                android:layout_below="@+id/slideViewPager2"
+                app:ci_drawable="@drawable/bg_indicator"
+                android:layout_marginTop="-40dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/circleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/content1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/slideViewPager2"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="@string/home_content_1"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/content2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/content1"
+                android:padding="5dp"
+                android:text="@string/home_content_2"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/content2"
+                android:layout_marginTop="10dp"
+                android:text="Địa chỉ: Số nhà X, đường Y, quận Z, Hà Nội"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hotline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/address"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Hotline: 0379103491 / 012345678"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/hotline"
+                android:layout_marginTop="10dp"
+                android:text="Email: hieuntph22081@fpt.edu.com"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgMap"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_below="@+id/email"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/map_img" />
+        </RelativeLayout>
+    </ScrollView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnTableOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="Đặt bàn"
+        app:cornerRadius="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

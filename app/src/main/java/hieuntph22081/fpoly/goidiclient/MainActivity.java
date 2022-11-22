@@ -11,12 +11,12 @@ import android.view.View;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import hieuntph22081.fpoly.goidiclient.adapter.ViewPager2Adapter;
+import hieuntph22081.fpoly.goidiclient.adapter.MainViewPager2Adapter;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView bottomNav;
     ViewPager2 viewPager2;
-    ViewPager2Adapter adapter;
+    MainViewPager2Adapter adapter;
     public static String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
         bottomNav = findViewById(R.id.bottomNav);
         viewPager2 = findViewById(R.id.viewPage2);
-        adapter = new ViewPager2Adapter(MainActivity.this);
+        adapter = new MainViewPager2Adapter(MainActivity.this);
         viewPager2.setAdapter(adapter);
-        viewPager2.setPageTransformer(new DepthPageTransformer());
+        viewPager2.setPageTransformer(new ZoomOutPageTransformer());
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
