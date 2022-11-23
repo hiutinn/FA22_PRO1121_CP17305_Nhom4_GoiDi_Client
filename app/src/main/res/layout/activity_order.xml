@@ -29,20 +29,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Họ tên"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Họ tên"
-                android:padding="12dp"
-                android:background="@drawable/bg_white_corner_10_border_gray"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:text="Ngày "
@@ -50,6 +36,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
             <EditText
+                android:id="@+id/edtDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Chọn ngày"
@@ -66,26 +53,13 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
             <EditText
+                android:id="@+id/edtStartTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Chọn giờ bắt đầu"
                 android:padding="12dp"
                 android:background="@drawable/bg_white_corner_10_border_gray"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text="Giờ kết thúc "
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Chọn giờ kết thúc"
-                android:padding="12dp"
-                android:background="@drawable/bg_white_corner_10_border_gray"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,6 +70,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
             <EditText
+                android:id="@+id/edtNoP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="VD: 4 người"
@@ -111,6 +86,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
             <EditText
+                android:id="@+id/edtNote"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:ems="10"
@@ -128,7 +104,9 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOrderDish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
@@ -157,13 +135,13 @@
             android:textStyle="bold"
             android:textColor="@color/white"/>
         <Button
-            android:id="@+id/btnSave"
+            android:id="@+id/btnOrder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="@color/yellow"
             android:textSize="14sp"
-            android:text="Lưu"
+            android:text="Đặt"
             android:textStyle="bold"
             android:textColor="@color/white"/>
     </LinearLayout>

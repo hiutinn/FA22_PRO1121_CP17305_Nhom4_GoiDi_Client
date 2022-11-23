@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -27,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        userId = getIntent().getExtras().getString("userId");
-
+        userId = getIntent().getBundleExtra("bundle").getString("userId");
         bottomNav = findViewById(R.id.bottomNav);
         viewPager2 = findViewById(R.id.viewPage2);
         adapter = new MainViewPager2Adapter(MainActivity.this);
