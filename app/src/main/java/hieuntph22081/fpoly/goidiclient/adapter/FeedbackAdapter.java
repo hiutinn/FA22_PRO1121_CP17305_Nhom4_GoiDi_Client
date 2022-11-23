@@ -17,6 +17,12 @@ import hieuntph22081.fpoly.goidiclient.model.FeedBack;
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>{
     Context context;
     List<FeedBack> feedBacks;
+
+    public FeedbackAdapter(Context context, List<FeedBack> feedBacks) {
+        this.context = context;
+        this.feedBacks = feedBacks;
+    }
+
     @NonNull
     @Override
     public FeedbackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
