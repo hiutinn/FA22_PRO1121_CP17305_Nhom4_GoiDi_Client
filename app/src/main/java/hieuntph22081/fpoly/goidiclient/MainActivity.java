@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        userId = getIntent().getBundleExtra("bundle").getString("userId");
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        if (bundle != null)
+            userId = bundle.getString("userId");
 
         bottomNav = findViewById(R.id.bottomNav);
         mViewPager2 = findViewById(R.id.viewPage2);

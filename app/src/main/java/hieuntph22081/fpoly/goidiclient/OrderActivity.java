@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -41,7 +46,7 @@ public class OrderActivity extends AppCompatActivity {
     User currentUser;
     int mHour, mMinute;
     RecyclerView recycleView_dishOrder;
-    List<OrderDish> orderDishes;
+    List<OrderDish> listOrderDish;
     OrderDishAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +66,19 @@ public class OrderActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnOrder);
         btnCancel = findViewById(R.id.btnCancel);
 
-        orderDishes = getIntent().getExtras().getParcelableArrayList("listOrderDish");
+        Intent intent= getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            listOrderDish = bundle.getParcelableArrayList("listOrderDish");
+            if (!listOrderDish.isEmpty())
+                btnChooseDish.setText("Chọn lại");
+            else
+                btnChooseDish.setText("Chọn món");
+        }
+
         recycleView_dishOrder.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         adapter = new OrderDishAdapter(this);
-        adapter.setData(orderDishes);
+        adapter.setData(listOrderDish);
         recycleView_dishOrder.setAdapter(adapter);
 
 
@@ -84,6 +98,8 @@ public class OrderActivity extends AppCompatActivity {
         String startTime = edtStartTime.getText().toString().trim();
         String note = edtNote.getText().toString().trim();
         String numberOfPeople = edtNoP.getText().toString().trim();
+
+        if (!validate()) return;
 
         myRef.child("users").child(MainActivity.userId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -105,11 +121,12 @@ public class OrderActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
+                order.setDishes(listOrderDish);
                 order.setNote(note);
                 order.setNumberOfPeople(Integer.parseInt(numberOfPeople));
                 order.setUser(currentUser);
-                myRef.child("orders").child(order.getId()).setValue(order).addOnSuccessListener(unused -> Toast.makeText(OrderActivity.this, "Đặt bàn thành công !", Toast.LENGTH_SHORT).show());
+                myRef.child("orders").child(order.getId()).setValue(order).addOnSuccessListener(unused
+                        -> openSuccessDialog());
             }
 
             @Override
@@ -119,10 +136,25 @@ public class OrderActivity extends AppCompatActivity {
         });
     }
 
+    public void openSuccessDialog () {
+        Dialog dialog = new Dialog(this);
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_success_notification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.findViewById(R.id.btnConfirm).setOnClickListener(v -> {
+            startActivity(new Intent(OrderActivity.this, MainActivity.class));
+            finish();
+            dialog.dismiss();
+        });
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.show();
+    }
+
     public boolean validate() {
         String date = edtDate.getText().toString().trim();
         String startTime = edtStartTime.getText().toString().trim();
-        String note = edtNote.getText().toString().trim();
         String numberOfPeople = edtNoP.getText().toString().trim();
         if (date.length() == 0) {
             Toast.makeText(this, "Hãy nhập ngày!", Toast.LENGTH_SHORT).show();
