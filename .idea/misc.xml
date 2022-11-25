@@ -8,21 +8,21 @@
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/drawable/bg_white_corner_10_border_gray.xml" value="0.212" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/drawable/bg_yellow_corner_10.xml" value="0.212" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/drawable/bg_yellow_corner_16_top_left_top_right.xml" value="0.124" />
-        <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/activity_choose_dish.xml" value="0.25416666666666665" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/activity_main.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/activity_order.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_home.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_my_orders.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_profile.xml" value="0.21875" />
-        <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/item_choose_dish.xml" value="0.25416666666666665" />
-        <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/item_dish_order.xml" value="0.25416666666666665" />
-        <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/item_slide.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/ic_order.xml" value="0.173" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/background_corner20_bordergray.xml" value="0.193" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1545" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_order.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_user.xml" value="0.173" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_choose_dish.xml" value="0.245018115942029" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_main.xml" value="0.253125" />
-        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_order.xml" value="0.1539855072463768" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_order.xml" value="0.1" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/dialog_notification.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/dialog_success_notification.xml" value="0.1" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_feedback.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_home.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_order.xml" value="0.24947916666666667" />
