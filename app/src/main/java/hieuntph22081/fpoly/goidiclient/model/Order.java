@@ -10,13 +10,11 @@ public class Order {
     private String date;
     private String startTime;
     private String endTime;
+    private String note;
+    private int numberOfPeople;
     private double total;
     private int status;
-
-    public Order() {
-    }
-
-    public Order(String id, User user, Table table, List<OrderDish> dishes, String date, String startTime, String endTime, double total, int status) {
+    public Order(String id, User user, Table table, List<OrderDish> dishes, String date, String startTime, String endTime, String note, double total, int status) {
         this.id = id;
         this.user = user;
         this.table = table;
@@ -24,11 +22,20 @@ public class Order {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.note = note;
         this.total = total;
         this.status = status;
     }
+    public Order() {
+    }
 
+    public String getNote() {
+        return note;
+    }
 
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public String getId() {
         return id;
