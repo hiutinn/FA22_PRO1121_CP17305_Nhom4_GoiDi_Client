@@ -75,20 +75,12 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             for (OrderDish orderDish1 : orderDishes) {
                 if (orderDish1.getDish().getId().equals(orderDish.getDish().getId())) {
                     orderDish1.setQuantity(soLuong.get());
-//                    for(OrderDish orderDish : orderDishes){
-//                        Log.e("ten",orderDish.getDish().getTen()+"");
-//                        Log.e("so luong",orderDish.getQuantity()+"");
-//                    }
                     iClickListener.OnClickUpdateItem(orderDishes);
                     return;
                 }
             }
             orderDishes.add(orderDish);
             iClickListener.OnClickUpdateItem(orderDishes);
-//            for(OrderDish orderDish : orderDishes){
-//                Log.e("ten",orderDish.getDish().getTen()+"");
-//                Log.e("so luong",orderDish.getQuantity()+"");
-//            }
         });
 
         holder.btn_giam.setOnClickListener(v -> {
@@ -99,7 +91,7 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             soLuong.getAndDecrement();
             holder.tv_soLuong.setText(String.valueOf(soLuong.get()));
             for (OrderDish orderDish1 : orderDishes) {
-                if (orderDish1.getDish().getId().equals(orderDish.getDish().getId())) {
+                if (orderDish1.getDish().getId().equals(dish.getId())) {
                     orderDish1.setQuantity(soLuong.get());
                     if(orderDish1.getQuantity()==0){
                         orderDishes.remove(orderDish1);
@@ -108,11 +100,6 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
                     return;
                 }
             }
-            iClickListener.OnClickUpdateItem(orderDishes);
-//            for(OrderDish orderDish : orderDishes){
-//                Log.e("ten",orderDish.getDish().getTen()+"");
-//                Log.e("so luong",orderDish.getQuantity()+"");
-//            }
         });
     }
 

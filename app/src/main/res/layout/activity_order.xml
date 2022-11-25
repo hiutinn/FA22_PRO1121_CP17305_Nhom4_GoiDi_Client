@@ -29,20 +29,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Họ tên"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Họ tên"
-                android:padding="12dp"
-                android:background="@drawable/bg_white_corner_10_border_gray"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:text="Ngày "
@@ -71,21 +57,7 @@
                 android:hint="Chọn giờ bắt đầu"
                 android:padding="12dp"
                 android:background="@drawable/bg_white_corner_10_border_gray"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text="Giờ kết thúc "
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Chọn giờ kết thúc"
-                android:padding="12dp"
-                android:background="@drawable/bg_white_corner_10_border_gray"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,9 +101,11 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"/>
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleView_dishOrder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
+                android:id="@+id/btn_order_chooseDish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chọn món"
