@@ -28,12 +28,16 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
     List<OrderDish> orderDishes = new ArrayList<>();
     OrderDish orderDish;
     IClickListener iClickListener;
+    List<OrderDish> listOrderDish ;
+
+
 
     public interface IClickListener{
-        void OnClickUpdateItem(List<OrderDish> list);
+        void OnClickItem(List<OrderDish> list);
     }
-    public ChooseDishAdapter(Context context,IClickListener listener) {
+    public ChooseDishAdapter(Context context,List<OrderDish> listOrderDish,IClickListener listener) {
         this.context = context;
+        this.listOrderDish = listOrderDish;
         this.iClickListener = listener;
     }
 
@@ -58,10 +62,25 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
         holder.tv_tenMonAn.setText(dish.getTen());
         holder.tv_gia.setText(String.valueOf(dish.getGia()));
         AtomicInteger soLuong = new AtomicInteger();
-        soLuong.set(dish.getSoLuong());
 
-        holder.btn_giam.setVisibility(View.INVISIBLE);
-        holder.tv_soLuong.setVisibility(View.INVISIBLE);
+        for(OrderDish dish1 : listOrderDish){
+            if(dish1.getDish().getId().equals(dish.getId())){
+                soLuong.set(dish1.getQuantity());
+                holder.tv_soLuong.setText(String.valueOf(soLuong.get()));
+                if(soLuong.get()>0){
+                    orderDish = new OrderDish();
+                    orderDish.setDish(dish);
+                    orderDish.setQuantity(soLuong.get());
+                    orderDishes.add(orderDish);
+                    iClickListener.OnClickItem(orderDishes);
+                }
+            }
+
+        }
+        if(soLuong.get()==0){
+            holder.btn_giam.setVisibility(View.INVISIBLE);
+            holder.tv_soLuong.setVisibility(View.INVISIBLE);
+        }
 
         holder.btn_tang.setOnClickListener(v -> {
             orderDish = new OrderDish();
@@ -75,12 +94,12 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             for (OrderDish orderDish1 : orderDishes) {
                 if (orderDish1.getDish().getId().equals(orderDish.getDish().getId())) {
                     orderDish1.setQuantity(soLuong.get());
-                    iClickListener.OnClickUpdateItem(orderDishes);
+                    iClickListener.OnClickItem(orderDishes);
                     return;
                 }
             }
             orderDishes.add(orderDish);
-            iClickListener.OnClickUpdateItem(orderDishes);
+            iClickListener.OnClickItem(orderDishes);
         });
 
         holder.btn_giam.setOnClickListener(v -> {
@@ -96,7 +115,7 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
                     if(orderDish1.getQuantity()==0){
                         orderDishes.remove(orderDish1);
                     }
-                    iClickListener.OnClickUpdateItem(orderDishes);
+                    iClickListener.OnClickItem(orderDishes);
                     return;
                 }
             }

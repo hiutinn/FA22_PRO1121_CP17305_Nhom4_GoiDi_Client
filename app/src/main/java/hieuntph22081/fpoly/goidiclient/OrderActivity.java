@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.Button;
 
@@ -32,8 +33,14 @@ public class OrderActivity extends AppCompatActivity {
         adapter = new OrderDishAdapter(OrderActivity.this);
         btn_chooseDish.setOnClickListener(v -> {
             Intent intent = new Intent(OrderActivity.this,ChooseDishActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("list", (Serializable) listOrderDish);
+            intent.putExtras(bundle);
             startActivity(intent);
         });
+        listOrderDish();
+    }
+    public void listOrderDish(){
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null){
@@ -41,11 +48,7 @@ public class OrderActivity extends AppCompatActivity {
         }
         adapter.setData(listOrderDish);
         findViewById(R.id.btnCancel).setOnClickListener(v -> {
-            Log.e("size",listOrderDish.size()+"");
-            for(OrderDish orderDish : listOrderDish){
-                Log.e("ten",orderDish.getDish().getTen()+"");
-                Log.e("soLuong",orderDish.getQuantity()+"");
-            }
+
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OrderActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
