@@ -33,6 +33,7 @@ public class ChooseDishActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<Dish> list= new ArrayList<>();
     List<OrderDish> listOrderDish2 = new ArrayList<>();
+    List<OrderDish> listOrderDish3 = new ArrayList<>();
     Button btn_ok;
 
 
@@ -45,9 +46,11 @@ public class ChooseDishActivity extends AppCompatActivity {
         btn_ok= findViewById(R.id.btn_ok);
         getListDishFromFireBase();
 
-        adapter = new ChooseDishAdapter(ChooseDishActivity.this, new ChooseDishAdapter.IClickListener() {
+        listOrderDish3 = (List<OrderDish>) getIntent().getExtras().getSerializable("list");
+
+        adapter = new ChooseDishAdapter(ChooseDishActivity.this,listOrderDish3, new ChooseDishAdapter.IClickListener() {
             @Override
-            public void OnClickUpdateItem(List<OrderDish> listOrderDish) {
+            public void OnClickItem(List<OrderDish> listOrderDish) {
                 double temp=0;
                 for (OrderDish orderDish : listOrderDish) {
                     temp = temp + (orderDish.getDish().getGia()*orderDish.getQuantity());

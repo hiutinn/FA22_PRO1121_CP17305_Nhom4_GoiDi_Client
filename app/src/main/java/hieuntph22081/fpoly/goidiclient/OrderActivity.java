@@ -12,9 +12,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import android.os.Parcelable;
+import android.util.Log;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -56,7 +61,6 @@ public class OrderActivity extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
-
         recycleView_dishOrder = findViewById(R.id.recycleView_dishOrder);
         edtDate = findViewById(R.id.edtDate);
         edtStartTime = findViewById(R.id.edtStartTime);
@@ -66,6 +70,26 @@ public class OrderActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnOrder);
         btnCancel = findViewById(R.id.btnCancel);
 
+         edtDate.setOnClickListener(v -> datePickerDialog(edtDate));
+        edtStartTime.setOnClickListener(v -> timePickerDialog(edtStartTime));
+
+       
+        btnOrder.setOnClickListener(v -> sendOrder());
+        btnCancel.setOnClickListener(v -> {
+            startActivity(new Intent(OrderActivity.this, MainActivity.class));
+            finish();
+        });
+      
+        btnChooseDish.setOnClickListener(v -> {
+            Intent intent = new Intent(OrderActivity.this,ChooseDishActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("list", (Serializable) listOrderDish);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+        listOrderDish();
+    }
+    public void listOrderDish(){
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null){
@@ -79,18 +103,11 @@ public class OrderActivity extends AppCompatActivity {
         recycleView_dishOrder.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         adapter = new OrderDishAdapter(this);
         adapter.setData(listOrderDish);
+
         recycleView_dishOrder.setAdapter(adapter);
 
 
-        edtDate.setOnClickListener(v -> datePickerDialog(edtDate));
-        edtStartTime.setOnClickListener(v -> timePickerDialog(edtStartTime));
-
-        btnChooseDish.setOnClickListener(v -> startActivity(new Intent(OrderActivity.this, ChooseDishActivity.class)));
-        btnOrder.setOnClickListener(v -> sendOrder());
-        btnCancel.setOnClickListener(v -> {
-            startActivity(new Intent(OrderActivity.this, MainActivity.class));
-            finish();
-        });
+       
     }
 
     private void sendOrder() {
