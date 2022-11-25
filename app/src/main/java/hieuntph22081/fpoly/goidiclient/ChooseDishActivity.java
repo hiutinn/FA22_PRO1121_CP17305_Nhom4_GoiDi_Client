@@ -45,9 +45,6 @@ public class ChooseDishActivity extends AppCompatActivity {
         btn_ok= findViewById(R.id.btn_ok);
         getListDishFromFireBase();
 
-        listOrderDish2 = (List<OrderDish>) getIntent().getExtras().getSerializable("list");
-
-
         adapter = new ChooseDishAdapter(ChooseDishActivity.this, new ChooseDishAdapter.IClickListener() {
             @Override
             public void OnClickUpdateItem(List<OrderDish> listOrderDish) {

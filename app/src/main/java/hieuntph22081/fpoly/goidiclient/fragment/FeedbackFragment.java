@@ -1,5 +1,9 @@
 package hieuntph22081.fpoly.goidiclient.fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,6 +36,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import hieuntph22081.fpoly.goidiclient.MainActivity;
+import hieuntph22081.fpoly.goidiclient.OrderActivity;
 import hieuntph22081.fpoly.goidiclient.R;
 import hieuntph22081.fpoly.goidiclient.adapter.FeedbackAdapter;
 import hieuntph22081.fpoly.goidiclient.model.FeedBack;
@@ -89,7 +97,7 @@ public class FeedbackFragment extends Fragment {
                 feedBack.setDate(date);
                 feedBack.setUser(user);
                 myRef.child("feedbacks").child(feedBack.getId()).setValue(feedBack).addOnSuccessListener(unused
-                        -> Toast.makeText(getContext(), "Nhận xét của bạn đã được gửi đi, cảm ơn đã góp ý.", Toast.LENGTH_LONG).show());
+                        -> openSuccessDialog("Nhận xét của bạn đã được gửi đi, cảm ơn đã góp ý."));
                 edtFeedbackContent.setText("");
             }
 
@@ -100,6 +108,24 @@ public class FeedbackFragment extends Fragment {
         });
 
 
+    }
+
+    public void openSuccessDialog (String text) {
+        Dialog dialog = new Dialog(getContext());
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_success_notification);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView tvNotifyContent = dialog.findViewById(R.id.tvNotifyContent);
+        tvNotifyContent.setText(text);
+        dialog.findViewById(R.id.btnConfirm).setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+            dialog.dismiss();
+        });
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.setCancelable(true);
+        dialog.show();
     }
 
     public void showListFeedback() {
