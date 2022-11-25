@@ -6,19 +6,27 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import hieuntph22081.fpoly.goidiclient.adapter.MainViewPager2Adapter;
+import hieuntph22081.fpoly.goidiclient.model.User;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     BottomNavigationView bottomNav;
-    ViewPager2 viewPager2;
+    public static ViewPager2 mViewPager2;
     MainViewPager2Adapter adapter;
     public static String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         decorView.setSystemUiVisibility(uiOptions);
 
         userId = getIntent().getBundleExtra("bundle").getString("userId");
+
         bottomNav = findViewById(R.id.bottomNav);
-        viewPager2 = findViewById(R.id.viewPage2);
+        mViewPager2 = findViewById(R.id.viewPage2);
         adapter = new MainViewPager2Adapter(MainActivity.this);
-        viewPager2.setAdapter(adapter);
-        viewPager2.setPageTransformer(new ZoomOutPageTransformer());
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        mViewPager2.setAdapter(adapter);
+        mViewPager2.setPageTransformer(new ZoomOutPageTransformer());
+        mViewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
@@ -61,18 +70,18 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-                viewPager2.setCurrentItem(0);
+                mViewPager2.setCurrentItem(0);
                 break;
 
             case R.id.nav_order:
-                viewPager2.setCurrentItem(1);
+                mViewPager2.setCurrentItem(1);
                 break;
 
             case R.id.nav_feedback:
-                viewPager2.setCurrentItem(2);
+                mViewPager2.setCurrentItem(2);
                 break;
             case R.id.nav_profile:
-                viewPager2.setCurrentItem(3);
+                mViewPager2.setCurrentItem(3);
                 break;
         }
         return true;
