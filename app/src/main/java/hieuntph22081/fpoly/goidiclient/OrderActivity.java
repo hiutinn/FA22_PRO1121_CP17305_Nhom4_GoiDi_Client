@@ -31,8 +31,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -51,7 +53,7 @@ public class OrderActivity extends AppCompatActivity {
     User currentUser;
     int mHour, mMinute;
     RecyclerView recycleView_dishOrder;
-    List<OrderDish> listOrderDish;
+    List<OrderDish> listOrderDish = new ArrayList<>();
     OrderDishAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
