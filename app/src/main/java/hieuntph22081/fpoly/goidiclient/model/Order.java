@@ -26,6 +26,15 @@ public class Order {
         this.total = total;
         this.status = status;
     }
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
     public Order() {
     }
 

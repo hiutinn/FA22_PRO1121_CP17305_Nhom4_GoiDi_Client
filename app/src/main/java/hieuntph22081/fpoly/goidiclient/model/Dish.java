@@ -1,9 +1,13 @@
 package hieuntph22081.fpoly.goidiclient.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Dish {
+public class Dish implements Parcelable, Serializable {
     private String id;
     private String ten;
     private double gia;
@@ -25,6 +29,26 @@ public class Dish {
         this.gia = gia;
         this.img = img;
     }
+
+    protected Dish(Parcel in) {
+        id = in.readString();
+        ten = in.readString();
+        gia = in.readDouble();
+        img = in.readString();
+        soLuong = in.readInt();
+    }
+
+    public static final Creator<Dish> CREATOR = new Creator<Dish>() {
+        @Override
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        @Override
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -83,5 +107,19 @@ public class Dish {
         result.put("ten", ten);
         result.put("img", img);
         return result;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(ten);
+        dest.writeDouble(gia);
+        dest.writeString(img);
+        dest.writeInt(soLuong);
     }
 }
