@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,13 +24,17 @@ import hieuntph22081.fpoly.goidiclient.R;
 import hieuntph22081.fpoly.goidiclient.model.Dish;
 import hieuntph22081.fpoly.goidiclient.model.OrderDish;
 
-public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.userViewHolder> {
-    private List<Dish> list;
-    private Context context;
-    List<OrderDish> orderDishes = new ArrayList<>();
+public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.userViewHolder> implements Filterable {
+    Context context;
     OrderDish orderDish;
     IClickListener iClickListener;
+    List<Dish> list;
+    List<Dish> listDish;
+    List<OrderDish> orderDishes = new ArrayList<>();
     List<OrderDish> listOrderDish ;
+
+    //list luu tam
+    List<OrderDish> listOrderTam = new ArrayList<>();
 
 
 
@@ -42,6 +48,7 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
     }
 
     public void setData(List<Dish> list){
+        this.listDish = list;
         this.list = list;
         notifyDataSetChanged();
     }
@@ -55,7 +62,7 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
     @Override
     public void onBindViewHolder(@NonNull userViewHolder holder, int position) {
 
-        Dish dish = list.get(position);
+        Dish dish = listDish.get(position);
         Glide.with(context).load(dish.getImg()).into(holder.img_monAn);
         ImageView.ScaleType scaleType = ImageView.ScaleType.FIT_XY;
         holder.img_monAn.setScaleType(scaleType);
@@ -72,11 +79,26 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
                     orderDish.setDish(dish);
                     orderDish.setQuantity(soLuong.get());
                     orderDishes.add(orderDish);
+                    for(int i =0; i<orderDishes.size()-1;i++){
+                        for(int x =i+1;x<orderDishes.size();x++){
+                            if(orderDishes.get(i).getDish().getId().equals(orderDishes.get(x).getDish().getId())){
+                                orderDishes.remove(x);
+                            }
+                        }
+                    }
                     iClickListener.OnClickItem(orderDishes);
                 }
             }
-
         }
+        //list tam
+        listOrderTam = listOrderDish;
+        for (OrderDish orderDish1 : listOrderTam) {
+            if (orderDish1.getDish().getId().equals(dish.getId())) {
+                soLuong.set(orderDish1.getQuantity());
+                holder.tv_soLuong.setText(String.valueOf(soLuong.get()));
+            }
+        }//
+
         if(soLuong.get()==0){
             holder.btn_giam.setVisibility(View.INVISIBLE);
             holder.tv_soLuong.setVisibility(View.INVISIBLE);
@@ -91,6 +113,13 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             orderDish.setDish(dish);
             orderDish.setQuantity(soLuong.get());
 
+            //list tam
+            for (OrderDish orderDish1 : listOrderTam) {
+                if (orderDish1.getDish().getId().equals(orderDish.getDish().getId())) {
+                    orderDish1.setQuantity(soLuong.get());
+                }
+            }//
+
             for (OrderDish orderDish1 : orderDishes) {
                 if (orderDish1.getDish().getId().equals(orderDish.getDish().getId())) {
                     orderDish1.setQuantity(soLuong.get());
@@ -98,6 +127,7 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
                     return;
                 }
             }
+            listOrderTam.add(orderDish);
             orderDishes.add(orderDish);
             iClickListener.OnClickItem(orderDishes);
         });
@@ -109,6 +139,18 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             }
             soLuong.getAndDecrement();
             holder.tv_soLuong.setText(String.valueOf(soLuong.get()));
+
+            //list tam
+            for (OrderDish orderDish1 : listOrderTam) {
+                if (orderDish1.getDish().getId().equals(dish.getId())) {
+                    orderDish1.setQuantity(soLuong.get());
+                    if(orderDish1.getQuantity()==0){
+                        listOrderTam.remove(orderDish1);
+                    }
+                }
+            }//
+
+
             for (OrderDish orderDish1 : orderDishes) {
                 if (orderDish1.getDish().getId().equals(dish.getId())) {
                     orderDish1.setQuantity(soLuong.get());
@@ -124,8 +166,8 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
 
     @Override
     public int getItemCount() {
-        if(list != null){
-            return list.size();
+        if(listDish != null){
+            return listDish.size();
         }
         return 0;
     }
@@ -143,5 +185,33 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             btn_tang = itemView.findViewById(R.id.btn_tang);
             btn_giam = itemView.findViewById(R.id.btn_giam);
         }
+    }
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String search = constraint.toString();
+                if(search.isEmpty()){
+                    listDish = list;
+                }else{
+                    List<Dish> listSearch = new ArrayList<>();
+                    for(Dish dish: list){
+                        if(dish.getTen().toLowerCase().contains(search)){
+                            listSearch.add(dish);
+                        }
+                    }
+                    listDish = listSearch;
+                }
+                FilterResults results = new FilterResults();
+                results.values = listDish;
+                return results;
+            }
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                    listDish = (List<Dish>) results.values;
+                    notifyDataSetChanged();
+            }
+        };
     }
 }

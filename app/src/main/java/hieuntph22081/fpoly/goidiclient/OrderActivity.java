@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import android.view.WindowManager;
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +49,7 @@ import hieuntph22081.fpoly.goidiclient.model.Order;
 import hieuntph22081.fpoly.goidiclient.model.OrderDish;
 import hieuntph22081.fpoly.goidiclient.model.User;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity{
     EditText edtDate, edtStartTime, edtNote, edtNoP;
     Button btnChooseDish, btnOrder, btnCancel;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
@@ -55,6 +58,7 @@ public class OrderActivity extends AppCompatActivity {
     RecyclerView recycleView_dishOrder;
     List<OrderDish> listOrderDish = new ArrayList<>();
     OrderDishAdapter adapter;
+    int check =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,17 +76,32 @@ public class OrderActivity extends AppCompatActivity {
         btnOrder = findViewById(R.id.btnOrder);
         btnCancel = findViewById(R.id.btnCancel);
 
-         edtDate.setOnClickListener(v -> datePickerDialog(edtDate));
+        edtDate.setOnClickListener(v -> datePickerDialog(edtDate));
         edtStartTime.setOnClickListener(v -> timePickerDialog(edtStartTime));
 
+
+        List<String> listOrder = readPreference();
+        if(listOrder.size()>0){
+            edtDate.setText(listOrder.get(0));
+            edtStartTime.setText(listOrder.get(1));
+            edtNoP.setText(listOrder.get(2));
+            edtNote.setText(listOrder.get(3));
+        }
        
-        btnOrder.setOnClickListener(v -> sendOrder());
+        btnOrder.setOnClickListener(v -> {
+            check =1;
+            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
+            sendOrder();
+        });
         btnCancel.setOnClickListener(v -> {
+            check =1;
+            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
             startActivity(new Intent(OrderActivity.this, MainActivity.class));
             finish();
         });
       
         btnChooseDish.setOnClickListener(v -> {
+            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
             Intent intent = new Intent(OrderActivity.this,ChooseDishActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("list", (Serializable) listOrderDish);
@@ -239,4 +258,28 @@ public class OrderActivity extends AppCompatActivity {
         }
         return true;
     }
+    public void savePreference(String date, String startTime,String numberOfPeople,String note,int check) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MY_ORDER", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        if(check == 1){
+            editor.clear();
+        }else{
+            editor.putString("date", date);
+            editor.putString("startTime", startTime);
+            editor.putString("numberOfPeople", numberOfPeople);
+            editor.putString("note", note);
+        }
+        editor.commit();
+    }
+    public List<String> readPreference() {
+        List<String> list = new ArrayList<>();
+        SharedPreferences s = getSharedPreferences("MY_ORDER", MODE_PRIVATE);
+        list.add(s.getString("date", ""));
+        list.add(s.getString("startTime", ""));
+        list.add(s.getString("numberOfPeople", ""));
+        list.add(s.getString("note", ""));
+        return list;
+    }
+
+
 }
