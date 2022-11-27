@@ -40,7 +40,6 @@ public class ChooseDishActivity extends AppCompatActivity {
     Button btn_ok;
     EditText edtSearch;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

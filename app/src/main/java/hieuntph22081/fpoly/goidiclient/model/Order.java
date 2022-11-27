@@ -5,7 +5,7 @@ import java.util.List;
 public class Order {
     private String id;
     private User user;
-    private Table table;
+    private List<Table> tables;
     private List<OrderDish> dishes;
     private String date;
     private String startTime;
@@ -14,28 +14,23 @@ public class Order {
     private int numberOfPeople;
     private double total;
     private int status;
-    public Order(String id, User user, Table table, List<OrderDish> dishes, String date, String startTime, String endTime, String note, double total, int status) {
+
+    public Order() {
+    }
+
+
+    public Order(String id, User user, List<Table> tables, List<OrderDish> dishes, String date, String startTime, String endTime, String note, int numberOfPeople, double total, int status) {
         this.id = id;
         this.user = user;
-        this.table = table;
+        this.tables = tables;
         this.dishes = dishes;
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.note = note;
+        this.numberOfPeople = numberOfPeople;
         this.total = total;
         this.status = status;
-    }
-
-    public int getNumberOfPeople() {
-        return numberOfPeople;
-    }
-
-    public void setNumberOfPeople(int numberOfPeople) {
-        this.numberOfPeople = numberOfPeople;
-    }
-
-    public Order() {
     }
 
     public String getNote() {
@@ -46,6 +41,22 @@ public class Order {
         this.note = note;
     }
 
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public List<Table> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tables = tables;
+    }
+
     public String getId() {
         return id;
     }
@@ -54,20 +65,12 @@ public class Order {
         this.id = id;
     }
 
-    public hieuntph22081.fpoly.goidiclient.model.User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public hieuntph22081.fpoly.goidiclient.model.Table getTable() {
-        return table;
-    }
-
-    public void setTable(Table table) {
-        this.table = table;
     }
 
     public List<OrderDish> getDishes() {
@@ -121,5 +124,4 @@ public class Order {
     public void setStatus(int status) {
         this.status = status;
     }
-
 }
