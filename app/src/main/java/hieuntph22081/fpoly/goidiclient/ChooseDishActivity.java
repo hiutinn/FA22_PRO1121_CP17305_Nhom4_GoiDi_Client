@@ -36,7 +36,6 @@ public class ChooseDishActivity extends AppCompatActivity {
     List<OrderDish> listOrderDish3 = new ArrayList<>();
     Button btn_ok;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

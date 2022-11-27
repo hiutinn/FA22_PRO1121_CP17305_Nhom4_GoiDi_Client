@@ -44,6 +44,7 @@ import hieuntph22081.fpoly.goidiclient.adapter.ChooseDishAdapter;
 import hieuntph22081.fpoly.goidiclient.adapter.OrderDishAdapter;
 import hieuntph22081.fpoly.goidiclient.model.Order;
 import hieuntph22081.fpoly.goidiclient.model.OrderDish;
+import hieuntph22081.fpoly.goidiclient.model.Table;
 import hieuntph22081.fpoly.goidiclient.model.User;
 
 public class OrderActivity extends AppCompatActivity {
@@ -144,6 +145,11 @@ public class OrderActivity extends AppCompatActivity {
                 order.setNote(note);
                 order.setNumberOfPeople(Integer.parseInt(numberOfPeople));
                 order.setUser(currentUser);
+//                List<Table> tables = new ArrayList<>();
+//                tables.add(new Table("table1668746853544", 2, 8));
+//                tables.add(new Table("table1668773416714", 1, 8));
+//                order.setTables(tables);
+                order.setTotal();
                 myRef.child("orders").child(order.getId()).setValue(order).addOnSuccessListener(unused
                         -> openSuccessDialog());
             }
