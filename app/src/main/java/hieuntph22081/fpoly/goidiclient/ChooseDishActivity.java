@@ -9,9 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +38,7 @@ public class ChooseDishActivity extends AppCompatActivity {
     List<OrderDish> listOrderDish2 = new ArrayList<>();
     List<OrderDish> listOrderDish3 = new ArrayList<>();
     Button btn_ok;
+    EditText edtSearch;
 
 
     @Override
@@ -43,6 +47,26 @@ public class ChooseDishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_dish);
 
         recyclerView = findViewById(R.id.recycleView_chooseDish);
+        edtSearch = findViewById(R.id.edtSearch);
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(edtSearch.getText().toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         btn_ok= findViewById(R.id.btn_ok);
         getListDishFromFireBase();
 
@@ -60,10 +84,7 @@ public class ChooseDishActivity extends AppCompatActivity {
             }
         });
 
-
-
         btn_ok.setOnClickListener(v -> {
-
             Intent intent = new Intent(ChooseDishActivity.this,OrderActivity.class);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("listOrderDish", (ArrayList<? extends Parcelable>) listOrderDish2);
