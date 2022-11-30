@@ -7,61 +7,21 @@
 
     <TextView
         android:id="@+id/title"
-        android:text="Hãy cho chúng tôi biết cảm nhận của bạn!"
-        android:gravity="center_horizontal"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:background="@color/black"
-        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:id="@+id/edtFeedbackContent"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_below="@+id/title"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/background_corner20_bordergray"
-        android:gravity="top"
-        android:hint="Nhận xét"
-        android:padding="10dp"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btnSendFeedback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edtFeedbackContent"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="20dp"
-        android:text="Gửi"
-        android:backgroundTint="@color/black"/>
-
-    <TextView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:background="@color/black"
-        android:layout_below="@+id/btnSendFeedback"/>
-    <TextView
-        android:id="@+id/title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đánh giá khác"
-        android:layout_below="@+id/line"
-        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="Nhận xét về nhà hàng!"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title2"
+        android:layout_below="@+id/title"
         android:layout_marginTop="5dp" />
 </RelativeLayout>

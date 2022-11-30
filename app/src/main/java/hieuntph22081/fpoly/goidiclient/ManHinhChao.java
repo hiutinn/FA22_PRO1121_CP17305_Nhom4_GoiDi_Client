@@ -18,11 +18,9 @@ public class ManHinhChao extends AppCompatActivity {
         ImageView ivlogo = findViewById(R.id.ivlogo);
 
         Glide.with(this).load(R.drawable.logo).into(ivlogo);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(ManHinhChao.this, LoginActivity.class));
-            }
-        },3500);
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(ManHinhChao.this, LoginActivity.class));
+            finish();
+        },3000);
     }
 }
