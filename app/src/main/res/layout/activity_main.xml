@@ -15,7 +15,8 @@
         app:itemRippleColor="#656565"
         app:itemIconTint="@color/custom_color_bottom_nav"
         app:itemTextColor="@color/white"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPage2"

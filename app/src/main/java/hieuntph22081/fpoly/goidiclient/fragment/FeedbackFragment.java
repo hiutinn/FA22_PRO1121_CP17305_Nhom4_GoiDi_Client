@@ -70,62 +70,7 @@ public class FeedbackFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerViewFeedback = view.findViewById(R.id.recyclerViewFeedback);
-        edtFeedbackContent = view.findViewById(R.id.edtFeedbackContent);
-        btnSendFeedback = view.findViewById(R.id.btnSendFeedback);
         showListFeedback();
-        btnSendFeedback.setOnClickListener(v -> sendFeedback());
-    }
-
-    private void sendFeedback() {
-        if (edtFeedbackContent.getText().toString().trim().length() == 0) {
-            Toast.makeText(getContext(), "Bạn chưa nhập gì cả !!!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        myRef.child("users").child(MainActivity.userId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                if (user == null) {
-                    Toast.makeText(getContext(), "Không lấy được user", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                FeedBack feedBack = new FeedBack();
-                feedBack.setId("feedback" + Calendar.getInstance().getTimeInMillis());
-                feedBack.setContent(edtFeedbackContent.getText().toString().trim());
-                String date = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
-                feedBack.setDate(date);
-                feedBack.setUser(user);
-                myRef.child("feedbacks").child(feedBack.getId()).setValue(feedBack).addOnSuccessListener(unused
-                        -> openSuccessDialog("Nhận xét của bạn đã được gửi đi, cảm ơn đã góp ý."));
-                edtFeedbackContent.setText("");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-    }
-
-    public void openSuccessDialog (String text) {
-        Dialog dialog = new Dialog(getContext());
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_success_notification);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView tvNotifyContent = dialog.findViewById(R.id.tvNotifyContent);
-        tvNotifyContent.setText(text);
-        dialog.findViewById(R.id.btnConfirm).setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), MainActivity.class));
-            getActivity().finish();
-            dialog.dismiss();
-        });
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-        dialog.setCancelable(true);
-        dialog.show();
     }
 
     public void showListFeedback() {

@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                     boolean check = false;
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
                         User user = snapshot1.getValue(User.class);
-                        if (phone.equals(user.getPhone()) && pw.equals(user.getPassword())) {
+                        if (phone.equals(user.getPhone()) && pw.equals(user.getPassword()) && user.getRole() == 1) {
                             check = true;
                             userId = user.getId();
                             break;

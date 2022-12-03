@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F4E879"
+        android:background="@color/black"
         android:padding="10dp">
 
         <androidx.cardview.widget.CardView
@@ -78,6 +78,19 @@
                     android:textColor="#E53935"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:visibility="invisible"
+                    android:enabled="false"/>
+
+                <Button
+                    android:id="@+id/btnFeedback"
+                    android:enabled="false"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/ic_feedback"
+                    android:textColor="#E53935"
                     android:visibility="invisible" />
 
                 <TextView

@@ -13,6 +13,7 @@ import java.util.List;
 
 import hieuntph22081.fpoly.goidiclient.R;
 import hieuntph22081.fpoly.goidiclient.model.FeedBack;
+import hieuntph22081.fpoly.goidiclient.model.Table;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.FeedbackViewHolder>{
     Context context;
@@ -33,6 +34,18 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
     public void onBindViewHolder(@NonNull FeedbackViewHolder holder, int position) {
         FeedBack feedBack = feedBacks.get(position);
         holder.tvUserName.setText(feedBack.getUser().getName());
+
+        if (feedBack.getOrder() != null) {
+            String tableStr = "Bàn: ";
+            for (Table table : feedBack.getOrder().getTables()) {
+                tableStr += table.getNumber();
+                if (feedBack.getOrder().getTables().indexOf(table) == feedBack.getOrder().getTables().size()-1)
+                    break;
+                tableStr +=  " , ";
+            }
+            holder.tvTable.setText(tableStr);
+            holder.tvNoP.setText(feedBack.getOrder().getNumberOfPeople() + " người");
+        }
         holder.tvContent.setText(feedBack.getContent());
         holder.tvDate.setText(feedBack.getDate());
     }
@@ -43,12 +56,14 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Feedba
     }
 
     class FeedbackViewHolder extends RecyclerView.ViewHolder {
-        TextView tvUserName, tvContent, tvDate;
+        TextView tvUserName, tvContent, tvDate, tvTable, tvNoP;
         public FeedbackViewHolder(@NonNull View itemView) {
             super(itemView);
             tvContent = itemView.findViewById(R.id.tvContent);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvDate = itemView.findViewById(R.id.tvDate);
+            tvTable = itemView.findViewById(R.id.tvTable);
+            tvNoP = itemView.findViewById(R.id.tvNoP);
         }
     }
 }
