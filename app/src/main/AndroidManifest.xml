@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionBar"
         tools:targetApi="31">
+        <service android:name=".FCM.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name=".ManHinhChao"
             android:exported="true">
@@ -37,7 +44,6 @@
         <activity
             android:name=".ChooseDishActivity"
             android:exported="true" >
-
         </activity>
         <activity
             android:name=".OrderActivity"
@@ -48,13 +54,10 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".MainActivity"

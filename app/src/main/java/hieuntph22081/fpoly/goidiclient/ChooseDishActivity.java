@@ -56,7 +56,7 @@ public class ChooseDishActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(edtSearch.getText().toString());
+                adapter.getFilter().filter(edtSearch.getText().toString().trim());
             }
 
             @Override
