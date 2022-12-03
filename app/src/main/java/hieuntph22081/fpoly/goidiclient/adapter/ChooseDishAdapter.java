@@ -60,7 +60,6 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
 
     @Override
     public void onBindViewHolder(@NonNull userViewHolder holder, int position) {
-
         Dish dish = listDish.get(position);
         Glide.with(context).load(dish.getImg()).into(holder.img_monAn);
         ImageView.ScaleType scaleType = ImageView.ScaleType.FIT_XY;
@@ -89,6 +88,14 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
                 }
             }
         }
+        if(soLuong.get()==0){
+            holder.btn_giam.setVisibility(View.INVISIBLE);
+            holder.tv_soLuong.setVisibility(View.INVISIBLE);
+        }else{
+            holder.btn_giam.setVisibility(View.VISIBLE);
+            holder.tv_soLuong.setVisibility(View.VISIBLE);
+        }
+
         //list tam
         listOrderTam = listOrderDish;
         for (OrderDish orderDish1 : listOrderTam) {
@@ -98,10 +105,6 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             }
         }//
 
-        if(soLuong.get()==0){
-            holder.btn_giam.setVisibility(View.INVISIBLE);
-            holder.tv_soLuong.setVisibility(View.INVISIBLE);
-        }
 
         holder.btn_tang.setOnClickListener(v -> {
             orderDish = new OrderDish();
@@ -143,12 +146,8 @@ public class ChooseDishAdapter extends RecyclerView.Adapter<ChooseDishAdapter.us
             for (OrderDish orderDish1 : listOrderTam) {
                 if (orderDish1.getDish().getId().equals(dish.getId())) {
                     orderDish1.setQuantity(soLuong.get());
-                    if(orderDish1.getQuantity()==0){
-                        listOrderTam.remove(orderDish1);
-                    }
                 }
             }//
-
 
             for (OrderDish orderDish1 : orderDishes) {
                 if (orderDish1.getDish().getId().equals(dish.getId())) {

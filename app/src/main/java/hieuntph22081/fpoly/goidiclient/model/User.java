@@ -8,6 +8,7 @@ public class User implements Serializable {
     private String id, name, phone, password;
     private int role;
     private int soLan;
+    private String token;
 
     public User() {
     }
@@ -75,5 +76,13 @@ public class User implements Serializable {
 
     public void setSoLan(int soLan) {
         this.soLan = soLan;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

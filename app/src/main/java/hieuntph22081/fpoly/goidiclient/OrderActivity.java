@@ -43,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import hieuntph22081.fpoly.goidiclient.FCM.FCMSend;
 import hieuntph22081.fpoly.goidiclient.adapter.ChooseDishAdapter;
 import hieuntph22081.fpoly.goidiclient.adapter.OrderDishAdapter;
 import hieuntph22081.fpoly.goidiclient.model.Order;
@@ -50,7 +51,7 @@ import hieuntph22081.fpoly.goidiclient.model.OrderDish;
 import hieuntph22081.fpoly.goidiclient.model.Table;
 import hieuntph22081.fpoly.goidiclient.model.User;
 
-public class OrderActivity extends AppCompatActivity{
+public class OrderActivity extends AppCompatActivity {
     EditText edtDate, edtStartTime, edtNote, edtNoP;
     Button btnChooseDish, btnOrder, btnCancel;
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
@@ -59,7 +60,8 @@ public class OrderActivity extends AppCompatActivity{
     RecyclerView recycleView_dishOrder;
     List<OrderDish> listOrderDish = new ArrayList<>();
     OrderDishAdapter adapter;
-    int check =0;
+    int check = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,28 +84,28 @@ public class OrderActivity extends AppCompatActivity{
 
 
         List<String> listOrder = readPreference();
-        if(listOrder.size()>0){
+        if (listOrder.size() > 0) {
             edtDate.setText(listOrder.get(0));
             edtStartTime.setText(listOrder.get(1));
             edtNoP.setText(listOrder.get(2));
             edtNote.setText(listOrder.get(3));
         }
-       
+
         btnOrder.setOnClickListener(v -> {
-            check =1;
-            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
+            check = 1;
+            savePreference(edtDate.getText().toString(), edtStartTime.getText().toString(), edtNoP.getText().toString(), edtNote.getText().toString(), check);
             sendOrder();
         });
         btnCancel.setOnClickListener(v -> {
-            check =1;
-            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
+            check = 1;
+            savePreference(edtDate.getText().toString(), edtStartTime.getText().toString(), edtNoP.getText().toString(), edtNote.getText().toString(), check);
             startActivity(new Intent(OrderActivity.this, MainActivity.class));
             finish();
         });
-      
+
         btnChooseDish.setOnClickListener(v -> {
-            savePreference(edtDate.getText().toString(),edtStartTime.getText().toString(),edtNoP.getText().toString(),edtNote.getText().toString(),check);
-            Intent intent = new Intent(OrderActivity.this,ChooseDishActivity.class);
+            savePreference(edtDate.getText().toString(), edtStartTime.getText().toString(), edtNoP.getText().toString(), edtNote.getText().toString(), check);
+            Intent intent = new Intent(OrderActivity.this, ChooseDishActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("list", (Serializable) listOrderDish);
             intent.putExtras(bundle);
@@ -111,10 +113,11 @@ public class OrderActivity extends AppCompatActivity{
         });
         listOrderDish();
     }
-    public void listOrderDish(){
-        Intent intent= getIntent();
+
+    public void listOrderDish() {
+        Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle != null){
+        if (bundle != null) {
             listOrderDish = bundle.getParcelableArrayList("listOrderDish");
             if (!listOrderDish.isEmpty())
                 btnChooseDish.setText("Chọn lại");
@@ -127,9 +130,6 @@ public class OrderActivity extends AppCompatActivity{
         adapter.setData(listOrderDish);
 
         recycleView_dishOrder.setAdapter(adapter);
-
-
-       
     }
 
     private void sendOrder() {
@@ -169,8 +169,33 @@ public class OrderActivity extends AppCompatActivity{
 //                tables.add(new Table("table1668773416714", 1, 8));
 //                order.setTables(tables);
                 order.setTotal();
-                myRef.child("orders").child(order.getId()).setValue(order).addOnSuccessListener(unused
-                        -> openSuccessDialog());
+                myRef.child("orders").child(order.getId()).setValue(order).addOnSuccessListener(unused -> {
+                    openSuccessDialog();
+
+                    myRef.child("users").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                                User user = dataSnapshot.getValue(User.class);
+                                String title = "Thông báo";
+                                String content = "Có đơn hàng mới";
+                                    if(user.getRole()==0){
+                                        FCMSend.pushNotification(
+                                                OrderActivity.this,
+                                                user.getToken(),
+                                                title,
+                                                content
+                                        );
+                                    }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                });
             }
 
             @Override
@@ -180,7 +205,7 @@ public class OrderActivity extends AppCompatActivity{
         });
     }
 
-    public void openSuccessDialog () {
+    public void openSuccessDialog() {
         Dialog dialog = new Dialog(this);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -191,7 +216,7 @@ public class OrderActivity extends AppCompatActivity{
             finish();
             dialog.dismiss();
         });
-        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.setCancelable(true);
         dialog.show();
     }
@@ -224,32 +249,32 @@ public class OrderActivity extends AppCompatActivity{
         return true;
     }
 
-    private void datePickerDialog(EditText editText){
+    private void datePickerDialog(EditText editText) {
         Calendar calendar = Calendar.getInstance();
-        int day1,month1,year1;
+        int day1, month1, year1;
         day1 = calendar.get(Calendar.DAY_OF_MONTH);
         month1 = calendar.get(Calendar.MONTH);
         year1 = calendar.get(Calendar.YEAR);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        DatePickerDialog datePickerDialog = new DatePickerDialog( this, (view, year, month, dayOfMonth) -> {
-            calendar.set(year,month,dayOfMonth);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+            calendar.set(year, month, dayOfMonth);
             editText.setText(simpleDateFormat.format(calendar.getTime()));
-        },year1,month1,day1);
+        }, year1, month1, day1);
         datePickerDialog.show();
     }
 
-    private void timePickerDialog(EditText editText){
+    private void timePickerDialog(EditText editText) {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = (view, hourOfDay, minute) -> {
             mHour = hourOfDay;
             mMinute = minute;
-            editText.setText(String.format(Locale.getDefault(), "%02d:%02d",hourOfDay,minute));
+            editText.setText(String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute));
         };
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, mHour, mMinute, true);
         timePickerDialog.show();
     }
 
-    private boolean validateTime (String time, String date) {
+    private boolean validateTime(String time, String date) {
         SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String mTime = date + " " + time;
         try {
@@ -264,12 +289,13 @@ public class OrderActivity extends AppCompatActivity{
         }
         return true;
     }
-    public void savePreference(String date, String startTime,String numberOfPeople,String note,int check) {
+
+    public void savePreference(String date, String startTime, String numberOfPeople, String note, int check) {
         SharedPreferences sharedPreferences = getSharedPreferences("MY_ORDER", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(check == 1){
+        if (check == 1) {
             editor.clear();
-        }else{
+        } else {
             editor.putString("date", date);
             editor.putString("startTime", startTime);
             editor.putString("numberOfPeople", numberOfPeople);
@@ -277,6 +303,7 @@ public class OrderActivity extends AppCompatActivity{
         }
         editor.commit();
     }
+
     public List<String> readPreference() {
         List<String> list = new ArrayList<>();
         SharedPreferences s = getSharedPreferences("MY_ORDER", MODE_PRIVATE);

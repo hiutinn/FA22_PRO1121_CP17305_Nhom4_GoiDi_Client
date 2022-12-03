@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import hieuntph22081.fpoly.goidiclient.adapter.MainViewPager2Adapter;
 import hieuntph22081.fpoly.goidiclient.model.User;
@@ -39,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle != null)
             userId = bundle.getString("userId");
+        getToken();
 
         bottomNav = findViewById(R.id.bottomNav);
         mViewPager2 = findViewById(R.id.viewPage2);
@@ -92,5 +98,29 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    public void getToken(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        // Log and toast
+                        Log.e("TAG", token);
+                        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId+"/token");
+                        databaseRef.setValue(token).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(MainActivity.this, "thanh cong", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
     }
 }
