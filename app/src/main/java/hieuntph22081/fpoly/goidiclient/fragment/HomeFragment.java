@@ -36,8 +36,7 @@ import hieuntph22081.fpoly.goidiclient.model.Photo;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeFragment extends Fragment {
-    MaterialButton btnTableOrder;
-    FloatingActionButton fabCallHotline;
+    MaterialButton btnTableOrder, fabCallHotline;
     ImageView imgMap;
     ViewPager2 viewPager2;
     CircleIndicator3 circleIndicator3;

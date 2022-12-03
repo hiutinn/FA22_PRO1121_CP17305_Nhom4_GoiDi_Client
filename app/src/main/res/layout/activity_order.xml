@@ -10,12 +10,12 @@
         android:id="@+id/dialogUserTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_yellow_corner_16_top_left_top_right"
+        android:background="@drawable/bg_red_corner_16_bottom"
         android:gravity="center"
-        android:padding="12dp"
+        android:padding="8dp"
         android:text="Đặt bàn"
-        android:textColor="#4E4A4A"
-        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         android:textStyle="bold" />
     <ScrollView
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingHorizontal="16dp"
             android:orientation="vertical">
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Chọn ngày"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:background="@drawable/bg_white_corner_10_border_gray"/>
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Chọn giờ bắt đầu"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:background="@drawable/bg_white_corner_10_border_gray"/>
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="VD: 4 người"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:background="@drawable/bg_white_corner_10_border_gray"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -123,7 +123,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp">
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
@@ -133,6 +134,7 @@
             android:backgroundTint="#474744"
             android:layout_marginEnd="10dp"
             android:text="Hủy"
+            android:padding="10dp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
         <Button
@@ -140,9 +142,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/yellow"
+            android:backgroundTint="@color/red"
             android:textSize="14sp"
             android:text="Đặt"
+            android:padding="10dp"
             android:textStyle="bold"
             android:textColor="@color/white"/>
     </LinearLayout>

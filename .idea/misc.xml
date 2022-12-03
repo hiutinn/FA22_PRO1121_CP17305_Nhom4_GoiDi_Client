@@ -18,9 +18,11 @@
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/bg_white_corner_16.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/ic_order.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/background_corner20_bordergray.xml" value="0.193" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_black_corner_16_bottom.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_black_corner_16_top_left_top_right.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_gray_corner_10.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_indicator.xml" value="0.2055" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_red_corner_16_bottom.xml" value="0.2015" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_yellow_corner_10.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_yellow_corner_16_top_left_top_right.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_drop_down.xml" value="0.193" />
@@ -29,7 +31,7 @@
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/ic_user.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_choose_dish.xml" value="0.245018115942029" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_main.xml" value="0.253125" />
-        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_order.xml" value="0.4" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/activity_order.xml" value="0.2" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/dialog_feedback.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/dialog_notification.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/dialog_success_notification.xml" value="0.1" />
