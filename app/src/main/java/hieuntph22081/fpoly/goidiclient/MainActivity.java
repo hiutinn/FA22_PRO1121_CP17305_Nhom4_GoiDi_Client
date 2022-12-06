@@ -102,25 +102,17 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
 
     public void getToken(){
         FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        // Log and toast
-                        Log.e("TAG", token);
-                        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId+"/token");
-                        databaseRef.setValue(token).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(MainActivity.this, "thanh cong", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                .addOnCompleteListener((OnCompleteListener<String>) task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w("TAG", "Fetching FCM registration token failed", task.getException());
+                        return;
                     }
+                    // Get new FCM registration token
+                    String token = task.getResult();
+                    // Log and toast
+                    Log.e("TAG", token);
+                    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId+"/token");
+                    databaseRef.setValue(token);
                 });
     }
 }

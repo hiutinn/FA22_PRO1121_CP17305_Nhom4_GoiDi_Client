@@ -50,17 +50,14 @@ public class LoginActivity extends AppCompatActivity {
         List<Object> chkList;
         chkList = readPreference();
         if (chkList.size()>0) {
-            if (!Boolean.parseBoolean(chkList.get(3).toString())) {
+            if (Boolean.parseBoolean(chkList.get(4).toString())) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("userId", chkList.get(0).toString());
                 intent.putExtra("bundle",bundle);
                 startActivity(intent);
+                Toast.makeText(this, "vailon", Toast.LENGTH_SHORT).show();
                 finish();
-            } else {
-                txtMaTT.setText(chkList.get(1).toString());
-                txtPassword.setText(chkList.get(2).toString());
-                chkRemember.setChecked(Boolean.parseBoolean(chkList.get(4).toString()));
             }
         }
 

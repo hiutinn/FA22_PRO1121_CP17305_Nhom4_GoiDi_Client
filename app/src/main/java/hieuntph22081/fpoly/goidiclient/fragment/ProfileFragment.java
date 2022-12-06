@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
-        savePreference(MainActivity.userId,"admin","admin",true,false);
+        savePreference(MainActivity.userId,"","",true,false);
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         Toast.makeText(getActivity(), "Đăng xuất thành công!", Toast.LENGTH_SHORT).show();
