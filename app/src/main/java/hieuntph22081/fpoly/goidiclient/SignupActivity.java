@@ -165,7 +165,7 @@ public class SignupActivity extends AppCompatActivity {
         user.setName(name);
         user.setPassword(password);
         user.setPhone(phone);
-        user.setRole(2);
+        user.setRole(1);
         user.setSoLan(0);
         myRef.child(user.getId()).setValue(user).addOnSuccessListener(unused -> {
             Toast.makeText(SignupActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
