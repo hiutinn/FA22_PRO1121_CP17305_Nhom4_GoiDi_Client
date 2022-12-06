@@ -97,7 +97,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.MyOrde
             case 3:
                 holder.tvHuy.setVisibility(View.INVISIBLE);
                 holder.tvHuy.setEnabled(false);
-                holder.tvOrderStatus.setText("Hủy");
+                holder.tvOrderStatus.setText("Đã Hủy");
                 holder.tvOrderStatus.setTextColor(Color.RED);
                 holder.itemView.setEnabled(false);
                 break;

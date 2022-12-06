@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
 
-        android:background="#eef15b"
+        android:background="@drawable/bg_black_corner_16_bottom"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -38,7 +38,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:text="My profile"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="23dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -46,8 +46,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/upperLayout"
         android:layout_above="@id/btnLogout"
+        android:layout_below="@+id/upperLayout"
         android:orientation="vertical">
 
         <LinearLayout
