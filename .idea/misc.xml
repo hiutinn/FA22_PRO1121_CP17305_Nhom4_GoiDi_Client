@@ -16,13 +16,10 @@
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_home.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_my_orders.xml" value="0.21875" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/fragment_profile.xml" value="0.21875" />
-
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/item_choose_dish.xml" value="0.12360688956433637" />
         <entry key="..\:/Du_an_1/FA22_PRO1121_CP17305_Nhom4_GoiDi_Client/app/src/main/res/layout/item_dish_order.xml" value="0.12360688956433637" />
-=======
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/bg_black_corner_10.xml" value="0.2055" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/bg_white_corner_16.xml" value="0.2055" />
-
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable-v24/ic_order.xml" value="0.173" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/background_corner20_bordergray.xml" value="0.193" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/drawable/bg_black_corner_16_bottom.xml" value="0.2055" />
@@ -47,6 +44,8 @@
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_my_orders.xml" value="0.253125" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_order.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/fragment_profile.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/item_choose_dish.xml" value="0.253125" />
+        <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/item_dish_order.xml" value="0.16168478260869565" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/item_feedback.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/item_my_orders.xml" value="0.2" />
         <entry key="..\:/Users/ADMIN/Documents/DU_AN_1/GoiDiClient/app/src/main/res/layout/item_recycle_chonmon.xml" value="0.253125" />

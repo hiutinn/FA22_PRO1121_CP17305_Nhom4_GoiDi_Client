@@ -1,5 +1,6 @@
 package hieuntph22081.fpoly.goidiclient.adapter;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,7 +76,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.MyOrde
                 holder.tvHuy.setVisibility(View.VISIBLE);
                 holder.tvHuy.setEnabled(true);
                 holder.tvHuy.setOnClickListener(v -> {
-                    myRef.child("orders").child(order.getId()).child("status").setValue(3);
+                    cancelOrder(order);
                 });
                 break;
             case 1:
@@ -102,6 +104,21 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.MyOrde
                 holder.itemView.setEnabled(false);
                 break;
         }
+    }
+
+    public void cancelOrder(Order order) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Delete");
+        builder.setMessage("Bạn có muốn hủy đơn này không ?");
+        builder.setCancelable(true);
+
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            myRef.child("orders").child(order.getId()).child("status").setValue(3).addOnSuccessListener(unused -> openSuccessDialog("Hủy đơn thành công!"));
+            dialog.cancel();
+            notifyDataSetChanged();
+        });
+        builder.setNegativeButton("No", (dialog, which) -> dialog.cancel());
+        builder.show();
     }
 
     private void openFeedbackDialog(Order order) {

@@ -22,6 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hieuntph22081.fpoly.goidiclient.LoginActivity;
 import hieuntph22081.fpoly.goidiclient.MainActivity;
 import hieuntph22081.fpoly.goidiclient.R;
@@ -82,14 +85,26 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
-        savePreference(MainActivity.userId,"","",true,false);
+        String phone = "";
+        String password = "";
+        boolean status = false;
+        List<Object> chkList;
+        chkList = readPreference();
+        if (chkList.size()>0) {
+            if (Boolean.parseBoolean(chkList.get(3).toString())) {
+                phone = chkList.get(1).toString();
+                password = chkList.get(2).toString();
+                status = Boolean.parseBoolean(chkList.get(3).toString());
+            }
+        }
+        savePreference(MainActivity.userId,phone,password,status);
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
         Toast.makeText(getActivity(), "Đăng xuất thành công!", Toast.LENGTH_SHORT).show();
         getActivity().finish();
     }
 
-    void savePreference(String userId, String phone, String pw, boolean isLogout, boolean status) {
+    void savePreference(String userId, String phone, String pw, boolean status) {
         SharedPreferences s = getActivity().getSharedPreferences("MY_FILE",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = s.edit();
         if (!status) { // Khong luu
@@ -98,9 +113,18 @@ public class ProfileFragment extends Fragment {
             editor.putString("userId",userId);
             editor.putString("phone",phone);
             editor.putString("password",pw);
-            editor.putBoolean("isLogout", isLogout);
             editor.putBoolean("CHK",status);
         }
         editor.commit();
+    }
+
+    List<Object> readPreference() {
+        List<Object> ls = new ArrayList<>();
+        SharedPreferences s = getActivity().getSharedPreferences("MY_FILE",Context.MODE_PRIVATE);
+        ls.add(s.getString("userId",""));
+        ls.add(s.getString("phone",""));
+        ls.add(s.getString("password",""));
+        ls.add(s.getBoolean("CHK",false));
+        return ls;
     }
 }

@@ -50,14 +50,10 @@ public class LoginActivity extends AppCompatActivity {
         List<Object> chkList;
         chkList = readPreference();
         if (chkList.size()>0) {
-            if (Boolean.parseBoolean(chkList.get(4).toString())) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("userId", chkList.get(0).toString());
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
-                Toast.makeText(this, "vailon", Toast.LENGTH_SHORT).show();
-                finish();
+            if (Boolean.parseBoolean(chkList.get(3).toString())) {
+                txtMaTT.setText(chkList.get(1).toString());
+                txtPassword.setText(chkList.get(2).toString());
+                chkRemember.setChecked(true);
             }
         }
 
@@ -128,14 +124,15 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     if (check) {
-                        savePreference(userId,phone,pw,!status,status);
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        savePreference(userId,phone,pw,status);
+//                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        finish();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putString("userId", userId);
                         intent.putExtra("bundle",bundle);
                         startActivity(intent);
-                        finish();
+
                     } else {
                         tvError.setText("Thông tin đăng nhập không chính xác!");
                         tvError.setVisibility(View.VISIBLE);
@@ -152,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    void savePreference(String userId, String phone, String pw, boolean isLogout, boolean status) {
+    void savePreference(String userId, String phone, String pw, boolean status) {
         SharedPreferences s = getSharedPreferences("MY_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor = s.edit();
         if (!status) { // Khong luu
@@ -161,7 +158,6 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("userId",userId);
             editor.putString("phone",phone);
             editor.putString("password",pw);
-            editor.putBoolean("isLogout", isLogout);
             editor.putBoolean("CHK",status);
         }
         editor.commit();
@@ -173,7 +169,6 @@ public class LoginActivity extends AppCompatActivity {
         ls.add(s.getString("userId",""));
         ls.add(s.getString("phone",""));
         ls.add(s.getString("password",""));
-        ls.add(s.getBoolean("isLogout",true));
         ls.add(s.getBoolean("CHK",false));
         return ls;
     }
